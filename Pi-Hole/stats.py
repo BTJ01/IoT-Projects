@@ -38,6 +38,7 @@ height = disp.width   # we swap height/width to rotate it to landscape!
 width = disp.height
 image = Image.new('RGB', (width, height))
 rotation = 90
+background_color = #546E7A
 
 # Get drawing object to draw on image.
 draw = ImageDraw.Draw(image)
@@ -102,27 +103,27 @@ while True:
     if not buttonA.value:  # just button A pressed
         # draw.text((x, y), IP, font=font, fill="#C0C0C0")
         # y += font.getsize(IP)[1]
-        draw.text((x, y), CPU, font=font, fill="#FFFF00")
+        draw.text((x, y), CPU, font=font, fill="#FF9800")
         y += font.getsize(CPU)[1]
-        draw.text((x, y), "Memory:", font=font, fill="#00FF00")
+        draw.text((x, y), "Memory:", font=font, fill="#26A69A")
         y += font.getsize(MemUsage)[1]
         draw.text((x, y), MemUsage, font=font, fill="#00FF00")
         y += font.getsize(MemUsage)[1]
-        draw.text((x, y), Disk, font=font, fill="#0000FF")
+        draw.text((x, y), Disk, font=font, fill="#9575CD")
         y += font.getsize(Disk)[1]
-        draw.text((x, y), Temp, font=font, fill="#FF00FF")
+        draw.text((x, y), Temp, font=font, fill="#EF5350")
         # y += font.getsize(Disk)[1]
         # draw.text((x, y), "DNS Queries: {}".format(DNSQUERIES), font=font, fill="#FF00FF")
     else:
         draw.text((x, y), "Pi-Hole", font=font, fill="#C0C0C0")
         y += font.getsize(HOST)[1]
-        draw.text((x, y), IP, font=font, fill="#FFFF00")
+        draw.text((x, y), IP, font=font, fill="#FF9800")
         y += font.getsize(IP)[1]
-        draw.text((x, y), "Ads Blocked: {}".format(str(ADSBLOCKED)), font=font, fill="#00FF00")
+        draw.text((x, y), "Ads Blocked: {}".format(str(ADSBLOCKED)), font=font, fill="#26A69A")
         y += font.getsize(str(ADSBLOCKED))[1]
-        draw.text((x, y), "Clients: {}".format(str(CLIENTS)), font=font, fill="#0000FF")
+        draw.text((x, y), "Clients: {}".format(str(CLIENTS)), font=font, fill="#9575CD")
         y += font.getsize(str(CLIENTS))[1]
-        draw.text((x, y), "DNS Queries: {}".format(str(DNSQUERIES)), font=font, fill="#FF00FF")
+        draw.text((x, y), "DNS Queries: {}".format(str(DNSQUERIES)), font=font, fill="#EF5350")
         y += font.getsize(str(DNSQUERIES))[1]
 
     # Display image.
