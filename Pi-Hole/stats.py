@@ -38,7 +38,7 @@ height = disp.width   # we swap height/width to rotate it to landscape!
 width = disp.height
 image = Image.new('RGB', (width, height))
 rotation = 90
-background_color = #546E7A
+display.fill(color565(84, 110, 122))
 
 # Get drawing object to draw on image.
 draw = ImageDraw.Draw(image)
