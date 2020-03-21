@@ -13,6 +13,7 @@ import board
 
 # Import Python Imaging Library
 from PIL import Image, ImageDraw, ImageFont
+from adafruit_rgb_display.rgb import color565
 import adafruit_rgb_display.st7789 as st7789
 
 api_url = 'http://localhost/admin/api.php'
