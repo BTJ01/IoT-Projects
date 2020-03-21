@@ -13,6 +13,7 @@ import board
 
 # Import Python Imaging Library
 from PIL import Image, ImageDraw, ImageFont
+from adafruit_rgb_display.rgb import color565
 import adafruit_rgb_display.st7789 as st7789
 
 api_url = 'http://localhost/admin/api.php'
@@ -43,7 +44,7 @@ height = disp.width   # we swap height/width to rotate it to landscape!
 width = disp.height
 image = Image.new('RGB', (width, height))
 rotation = 90
-disp.fill(84, 110, 122)
+disp.fill(color565(84, 110, 122))
 
 # Get drawing object to draw on image.
 draw = ImageDraw.Draw(image)
