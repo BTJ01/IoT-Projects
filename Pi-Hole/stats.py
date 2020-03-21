@@ -113,7 +113,7 @@ while True:
         y += font.getsize(CPU)[1]
         draw.text((x, y), "Memory:", font=font, fill="#26A69A")
         y += font.getsize(MemUsage)[1]
-        draw.text((x, y), MemUsage, font=font, fill="#00FF00")
+        draw.text((x, y), MemUsage, font=font, fill="#26A69A")
         y += font.getsize(MemUsage)[1]
         draw.text((x, y), Disk, font=font, fill="#9575CD")
         y += font.getsize(Disk)[1]
