@@ -44,13 +44,12 @@ height = disp.width   # we swap height/width to rotate it to landscape!
 width = disp.height
 image = Image.new('RGB', (width, height))
 rotation = 90
-disp.fill(color565(84, 110, 122))
 
 # Get drawing object to draw on image.
 draw = ImageDraw.Draw(image)
 
 # Draw a black filled box to clear the image.
-draw.rectangle((0, 0, width, height), outline=0, fill=(0, 0, 0))
+draw.rectangle((0, 0, width, height), outline=0, fill=(80, 110, 120))
 disp.image(image, rotation)
 # Draw some shapes.
 # First define some constants to allow easy resizing of shapes.
