@@ -49,13 +49,15 @@ rotation = 90
 draw = ImageDraw.Draw(image)
 
 # Draw a black filled box to clear the image.
-draw.rectangle((0, 0, width, height), outline=0, fill=(80, 110, 120))
+draw.rectangle((0, 0, width, height), outline=0, fill=0)
 disp.image(image, rotation)
+
 # Draw some shapes.
 # First define some constants to allow easy resizing of shapes.
 padding = -2
 top = padding
 bottom = height-padding
+
 # Move left to right keeping track of the current x position for drawing shapes.
 x = 0
 
@@ -68,14 +70,17 @@ font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', 24)
 # Turn on the backlight
 backlight = digitalio.DigitalInOut(board.D22)
 backlight.switch_to_output()
-backlight.value = True
+
 
 # Add buttons as inputs
 buttonA = digitalio.DigitalInOut(board.D23)
+buttonB = digitalio.DigitalInOut(board.D24)
 buttonA.switch_to_input()
+buttonB.switch_to_input()
+
 
 while True:
-    # Draw a black filled box to clear the image.
+    # Draw a grey filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
     # Shell scripts for system monitoring from here:
@@ -105,7 +110,12 @@ while True:
         continue
 
     y = top
-    if not buttonA.value:  # just button A pressed
+    if buttonA.value and buttonB.value:  # no buttons pressed
+        backlight.value = False  # turn off backlight
+    
+    elif buttonA.value and not buttonB.value:  # just button B pressed
+        draw.rectangle((0, 0, width, height), outline=0, fill=(80, 110, 120))
+        backlight.value = True
         # draw.text((x, y), IP, font=font, fill="#C0C0C0")
         # y += font.getsize(IP)[1]
         draw.text((x, y), CPU, font=font, fill="#FF9800")
@@ -119,7 +129,10 @@ while True:
         draw.text((x, y), Temp, font=font, fill="#EF5350")
         # y += font.getsize(Disk)[1]
         # draw.text((x, y), "DNS Queries: {}".format(DNSQUERIES), font=font, fill="#FF00FF")
-    else:
+    
+    elif buttonB.value and not buttonA.value:  # just button A pressed
+        draw.rectangle((0, 0, width, height), outline=0, fill=(80, 110, 120))
+        backlight.value = True
         draw.text((x, y), "Pi-Hole", font=font, fill="#C0C0C0")
         y += font.getsize(HOST)[1]
         draw.text((x, y), IP, font=font, fill="#FF9800")
@@ -130,6 +143,9 @@ while True:
         y += font.getsize(str(CLIENTS))[1]
         draw.text((x, y), "DNS Queries: {}".format(str(DNSQUERIES)), font=font, fill="#EF5350")
         y += font.getsize(str(DNSQUERIES))[1]
+    
+    else:
+        backlight.value = False
 
     # Display image.
     disp.image(image, rotation)
