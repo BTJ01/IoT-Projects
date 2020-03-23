@@ -80,39 +80,43 @@ buttonB.switch_to_input()
 
 
 while True:
-    # Shell scripts for system monitoring from here:
-    # https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
-    cmd = "hostname -I | cut -d\' \' -f1"
-    IP = "IP: "+subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "hostname | tr -d \'\\n\'"
-    HOST = subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
-    CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "free -m | awk 'NR==2{printf \"%s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
-    MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%d GB  %s\", $3,$2,$5}'"
-    Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
-    cmd = "cat /sys/class/thermal/thermal_zone0/temp |  awk \'{printf \"CPU Temp: %.1f C\", $(NF-0) / 1000}\'" # pylint: disable=line-too-long
-    Temp = subprocess.check_output(cmd, shell=True).decode("utf-8")
-
-    # Pi Hole data!
-    try:
-        r = requests.get(api_url)
-        data = json.loads(r.text)
-        DNSQUERIES = data['dns_queries_today']
-        ADSBLOCKED = data['ads_blocked_today']
-        CLIENTS = data['unique_clients']
-    except KeyError:
-        time.sleep(1)
-        continue
-
-    y = top
+    
     if buttonA.value and buttonB.value:  # no buttons pressed
         draw.rectangle((0, 0, width, height), outline=0, fill=0)
         backlight.value = False  # turn off backlight
+    else:
+        # Shell scripts for system monitoring from here:
+        # https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
+        cmd = "hostname -I | cut -d\' \' -f1"
+        IP = "IP: "+subprocess.check_output(cmd, shell=True).decode("utf-8")
+        cmd = "hostname | tr -d \'\\n\'"
+        HOST = subprocess.check_output(cmd, shell=True).decode("utf-8")
+        cmd = "top -bn1 | grep load | awk '{printf \"CPU Load: %.2f\", $(NF-2)}'"
+        CPU = subprocess.check_output(cmd, shell=True).decode("utf-8")
+        cmd = "free -m | awk 'NR==2{printf \"%s/%s MB  %.2f%%\", $3,$2,$3*100/$2 }'"
+        MemUsage = subprocess.check_output(cmd, shell=True).decode("utf-8")
+        cmd = "df -h | awk '$NF==\"/\"{printf \"Disk: %d/%d GB  %s\", $3,$2,$5}'"
+        Disk = subprocess.check_output(cmd, shell=True).decode("utf-8")
+        cmd = "cat /sys/class/thermal/thermal_zone0/temp |  awk \'{printf \"CPU Temp: %.1f C\", $(NF-0) / 1000}\'" 
+        # pylint: disable=line-too-long
+        Temp = subprocess.check_output(cmd, shell=True).decode("utf-8")
+        
+        # Pi Hole data!
+        try:
+            r = requests.get(api_url)
+            data = json.loads(r.text)
+            DNSQUERIES = data['dns_queries_today']
+            ADSBLOCKED = data['ads_blocked_today']
+            CLIENTS = data['unique_clients']
+        except KeyError:
+            time.sleep(1)
+            continue
+
+    y = top
     
-    elif buttonA.value and not buttonB.value:  # just button B pressed
-        #draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
+    
+    if buttonA.value and not buttonB.value:  # just button B pressed
+        draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
         backlight.value = True
         # draw.text((x, y), IP, font=font, fill="#C0C0C0")
         # y += font.getsize(IP)[1]
@@ -129,8 +133,8 @@ while True:
         # draw.text((x, y), "DNS Queries: {}".format(DNSQUERIES), font=font, fill="#FF00FF")
     
     elif buttonB.value and not buttonA.value:  # just button A pressed
-        backlight.value = True
         draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
+        backlight.value = True
         draw.text((x, y), "Pi-Hole", font=font, fill="#C0C0C0")
         y += font.getsize(HOST)[1]
         draw.text((x, y), IP, font=font, fill="#FF9800")
