@@ -80,9 +80,6 @@ buttonB.switch_to_input()
 
 
 while True:
-    # Draw a grey filled box to clear the image.
-    draw.rectangle((0, 0, width, height), outline=0, fill=0)
-
     # Shell scripts for system monitoring from here:
     # https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
     cmd = "hostname -I | cut -d\' \' -f1"
@@ -111,10 +108,11 @@ while True:
 
     y = top
     if buttonA.value and buttonB.value:  # no buttons pressed
+        draw.rectangle((0, 0, width, height), outline=0, fill=0)
         backlight.value = False  # turn off backlight
     
     elif buttonA.value and not buttonB.value:  # just button B pressed
-        draw.rectangle((0, 0, width, height), outline=0, fill=(80, 110, 120))
+        draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
         backlight.value = True
         # draw.text((x, y), IP, font=font, fill="#C0C0C0")
         # y += font.getsize(IP)[1]
@@ -131,7 +129,7 @@ while True:
         # draw.text((x, y), "DNS Queries: {}".format(DNSQUERIES), font=font, fill="#FF00FF")
     
     elif buttonB.value and not buttonA.value:  # just button A pressed
-        draw.rectangle((0, 0, width, height), outline=0, fill=(80, 110, 120))
+        draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
         backlight.value = True
         draw.text((x, y), "Pi-Hole", font=font, fill="#C0C0C0")
         y += font.getsize(HOST)[1]
@@ -145,6 +143,7 @@ while True:
         y += font.getsize(str(DNSQUERIES))[1]
     
     else:
+        draw.rectangle((0, 0, width, height), outline=0, fill=0)
         backlight.value = False
 
     # Display image.
