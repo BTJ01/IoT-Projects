@@ -1,6 +1,6 @@
 # Pi-Projects
 
-A place to keep track of things used in my Raspberry Pi Projects
+A place to keep track of my Raspberry Pi Projects
 
 ## Projects
 
