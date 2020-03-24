@@ -6,7 +6,7 @@ A place to keep track of things used in my Raspberry Pi Projects
 
 #### Pi Zero W + PiTFT:
 1. Pi-Hole Ad-Blocker
-  . Stats.py - tweaked script from AdaFruit ([found here](https://learn.adafruit.com/pi-hole-ad-blocker-with-pi-zero-w/install-mini-pitft "Pi-Hole Ad-Blocker: Install Mini PiTFT")) to adjust stats display to my liking
+  -- Stats.py - tweaked script from AdaFruit ([found here](https://learn.adafruit.com/pi-hole-ad-blocker-with-pi-zero-w/install-mini-pitft "Pi-Hole Ad-Blocker: Install Mini PiTFT")) to adjust stats display to my liking
     - changed `HOST` to display "Pi-Hole", moved to first line
     - changed font colors
     - removed `IP` & `DNS Queries` from screen2
