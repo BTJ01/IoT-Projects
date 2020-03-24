@@ -116,7 +116,7 @@ while True:
     
     
     if buttonA.value and not buttonB.value:  # just button B pressed
-        draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
+        draw.rectangle((0, 0, width, height), outline=0, fill=(15, 25, 40))
         backlight.value = True
         # draw.text((x, y), IP, font=font, fill="#C0C0C0")
         # y += font.getsize(IP)[1]
@@ -133,7 +133,7 @@ while True:
         # draw.text((x, y), "DNS Queries: {}".format(DNSQUERIES), font=font, fill="#FF00FF")
     
     elif buttonB.value and not buttonA.value:  # just button A pressed
-        draw.rectangle((0, 0, width, height), outline=0, fill=(30, 45, 60))
+        draw.rectangle((0, 0, width, height), outline=0, fill=(15, 25, 40))
         backlight.value = True
         draw.text((x, y), "Pi-Hole", font=font, fill="#C0C0C0")
         y += font.getsize(HOST)[1]
