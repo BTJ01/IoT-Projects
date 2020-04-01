@@ -1,8 +1,8 @@
-# Pi-Projects
+# IoT-Projects
 
-A place to keep track of my Raspberry Pi Projects
+A place to keep track of my projects utilizing Raspberry Pi, Jetson Nano, etc.
 
-## Projects
+## Pi-Projects
 
 #### Pi Zero W + PiTFT:
 1. Pi-Hole Ad-Blocker
@@ -16,3 +16,10 @@ A place to keep track of my Raspberry Pi Projects
     - set top button to display screen1, bottom button to display screen2
     - calculations don't run until a button is pressed
   - Unbound Recursive DNS Resolver
+
+
+## Jetson-Projects
+
+
+#### Jetson Nano + Waveshare IMX219-160IR Camera
+1. DLInano
